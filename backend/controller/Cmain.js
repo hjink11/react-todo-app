@@ -64,3 +64,35 @@ exports.patchDoneState = async (req, res) => {
 };
 
 // 수정 삭제에 대한 api
+
+exports.deleteTodo = async (req, res) => {
+  try {
+    const { todoId } = req.params; //params로 id 가져와 구조분해/:id
+    const isDeleted = await Todo.destroy({ where: { id: todoId } });
+    //isDeleted가 0 이나 1을 반환하니까 Boolean형으로
+    Boolean(isDeleted)
+      ? res.send({ isSuccess: true })
+      : res.send({ isSuccess: false });
+  } catch (err) {
+    console.log("sever err", err);
+    res.status(500).send("Sever Error");
+  }
+};
+
+exports.patchContents = async (req, res) => {
+  try {
+    //req.body={id,text}
+    const { id, text } = req.body;
+    const [isUpdated] = await Todo.update(
+      //text를 들어오는 text로 바꾼다. 같은이름은 text,id만 써도 됨
+      { text: text },
+      { where: { id: id } }
+    );
+    Boolean(isUpdated)
+      ? res.send({ isSuccess: true })
+      : res.send({ isSuccess: false });
+  } catch (err) {
+    console.log("sever err", err);
+    res.status(500).send("Sever Error");
+  }
+};
