@@ -7,10 +7,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "admin",
+    "password": "sesac1234!",
+    "database": "sesac",
+    "host": "sesac-rds.ch2mwy4ki2sy.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
